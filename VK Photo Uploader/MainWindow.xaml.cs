@@ -24,5 +24,10 @@ namespace VK_Photo_Uploader
         {
             InitializeComponent();
         }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
