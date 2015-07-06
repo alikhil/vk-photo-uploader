@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VK_Photo_Uploader.Classes;
+using VK_Photo_Uploader.Pages;
+
 namespace VK_Photo_Uploader
 {
     /// <summary>
