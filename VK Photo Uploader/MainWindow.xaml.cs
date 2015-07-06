@@ -24,7 +24,8 @@ namespace VK_Photo_Uploader
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Uri("Pages/AuthorizationPage.xaml", UriKind.Relative));
+            AuthorizationPage AuthPage = new AuthorizationPage();
+            MainFrame.Navigate(AuthPage);
         }
     }
 }
