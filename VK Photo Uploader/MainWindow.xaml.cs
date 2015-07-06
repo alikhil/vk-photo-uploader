@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using VK_Photo_Uploader.Classes;
 namespace VK_Photo_Uploader
 {
     /// <summary>
@@ -23,11 +24,7 @@ namespace VK_Photo_Uploader
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void LoginBtn_Click(object sender, RoutedEventArgs e)
-        {
-
+            MainFrame.Navigate(new Uri("Pages/AuthorizationPage.xaml", UriKind.Relative));
         }
     }
 }

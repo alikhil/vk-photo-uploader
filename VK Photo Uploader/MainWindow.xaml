@@ -2,13 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="VK Photo Uploader" Height="300" Width="525">
-    <Grid>
-        <StackPanel Margin="0,50,0,0">
-            <Label Content="Логин" Width="50" Height="30"/>
-            <TextBox Name="LoginTBox"  Width="150"/>
-            <Label Content="Пароль" Width="50" Height="30"/>
-            <PasswordBox Name="PasswordTBox" Width="150"/>
-            <Button Width="150" Height="20" Margin="0,15,0,0" Name="LoginBtn" Click="LoginBtn_Click" Content="Войти"/>
-        </StackPanel>
-    </Grid>
+    <DockPanel>
+        <Frame Name="MainFrame"  />
+    </DockPanel>
 </Window>
