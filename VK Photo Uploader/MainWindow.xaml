@@ -7,7 +7,7 @@
             <Label Content="Логин" Width="50" Height="30"/>
             <TextBox Name="LoginTBox"  Width="150"/>
             <Label Content="Пароль" Width="50" Height="30"/>
-            <TextBox Name="PasswordTBox"  Width="150"/>
+            <PasswordBox Name="PasswordTBox" Width="150"/>
             <Button Width="150" Height="20" Margin="0,15,0,0" Name="LoginBtn" Click="LoginBtn_Click" Content="Войти"/>
         </StackPanel>
     </Grid>
