@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace VK_Photo_Uploader.Pages
 {
@@ -20,9 +22,56 @@ namespace VK_Photo_Uploader.Pages
     /// </summary>
     public partial class UploadPage : Page
     {
+        private string[] FileNames;
         public UploadPage()
         {
             InitializeComponent();
         }
+
+        private void ChosePhotosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            ofd.Filter = "Фотографии |*.jpg;*.png;*.jpeg";
+            ofd.Multiselect = true;
+            var res = ofd.ShowDialog();
+            if(res.Value)
+            {
+                FileNames = ofd.FileNames;
+            }
+        }
+
+        private void UploadBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private static bool IsTextAllowed(string text)
+        {
+            Regex regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
+            return !regex.IsMatch(text);
+        }
+
+        private void OwnerIdTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private void OwnerIdTBox_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowed(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+
     }
 }
