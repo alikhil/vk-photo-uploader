@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VK_Photo_Uploader
+namespace VK_Photo_Uploader.Pages
 {
     /// <summary>
     /// Логика взаимодействия для AuthorizationPage.xaml
@@ -38,15 +38,17 @@ namespace VK_Photo_Uploader
                 {
                     Cursor = Cursors.Arrow;
                     StatusLabel.Content = !auth ? "Неправильный пароль или логин" : "";
+                    if (auth)
+                    {
+                        UploadPage UploadP = new UploadPage();
+                        NavigationService.Navigate(UploadP);
+                    }
+                    else
+                    {
+                        PasswordTBox.Password = "";
+                    }
                 });
-                if (auth)
-                {
-                    
-                }
-                else
-                {
-                   
-                }
+                
                
 
             }));
