@@ -3,6 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="VK Photo Uploader" Height="300" Width="525">
     <DockPanel>
-        <Frame Name="MainFrame"  />
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" />
     </DockPanel>
 </Window>
