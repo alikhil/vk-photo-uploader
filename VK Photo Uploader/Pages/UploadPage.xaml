@@ -4,10 +4,23 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="300" d:DesignWidth="339.474"
 	Title="UploadPage">
 
     <Grid>
-        
+        <StackPanel>
+            <Label Content="Введите Id пользователя или группы" HorizontalAlignment="Center" Margin="0,50,0,0"/>
+            <TextBox Name="OwnerIdTBox" Width="150" PreviewTextInput="OwnerIdTBox_PreviewTextInput" DataObject.Pasting="OwnerIdTBox_Pasting"/>
+            <TextBlock Margin="0,5"  HorizontalAlignment="Center">
+                <Hyperlink NavigateUri="HelpPage.xaml">Как узнать Id?</Hyperlink>
+            </TextBlock>
+            <Label Content="Прикрепляемое сообщение"  HorizontalAlignment="Center"  />
+            <TextBox Name="MessageTBox" TextWrapping="Wrap"  AcceptsReturn="True" Width="200"  />
+            <TextBlock Name="PhotoStatus" HorizontalAlignment="Center" Margin="0,5"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                <Button Width="100" Content="Выбрать фотки" Click="ChosePhotosBtn_Click" Height="20"/>
+                <Button Width="100" Content="Загрузить" Click="UploadBtn_Click" Height="20" Margin="10,0,0,0"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
