@@ -22,7 +22,7 @@ namespace VK_Photo_Uploader.Pages
     /// </summary>
     public partial class UploadPage : Page
     {
-        private string[] FileNames;
+        private string[] FileNames = new string[] { };
         public UploadPage()
         {
             InitializeComponent();
@@ -41,9 +41,20 @@ namespace VK_Photo_Uploader.Pages
             }
         }
 
-        private void UploadBtn_Click(object sender, RoutedEventArgs e)
+        private async void UploadBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if(String.IsNullOrEmpty(OwnerIdTBox.Text))
+            {
+                MessageBox.Show("Укажите Id!");
+                return;
+            }
+            if(FileNames.Length == 0)
+            {
+                MessageBox.Show("Выберите фотографии!");
+                return;
+            }
+            var res = await VKPhotoUploader.UploadImages(Convert.ToInt64(OwnerIdTBox.Text), FileNames, MessageTBox.Text);
+            MessageBox.Show(res == "OK" ? "Фотографии успешно загружены" : res);
         }
 
         private static bool IsTextAllowed(string text)
