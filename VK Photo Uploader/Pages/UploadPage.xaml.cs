@@ -26,6 +26,23 @@ namespace VK_Photo_Uploader.Pages
         public UploadPage()
         {
             InitializeComponent();
+            VKPhotoUploader.OnTotalProgressChange += VKPhotoUploader_OnTotalProgressChange;
+            VKPhotoUploader.OnImageUploadProgressChange += VKPhotoUploader_OnImageUploadProgressChange;
+        }
+
+        void VKPhotoUploader_OnImageUploadProgressChange(System.Net.UploadProgressChangedEventArgs e)
+        {
+            Dispatcher.Invoke(() => {
+                ImageProgressBar.Maximum = 100;
+                ImageProgressBar.Value = e.ProgressPercentage;
+            });
+        }
+
+        void VKPhotoUploader_OnTotalProgressChange(int uploaded, int total)
+        {
+            Dispatcher.Invoke(() => {
+                UploadStatus.Text = String.Format("Загружено фотографий {0} из {1}", uploaded, total);
+            });
         }
 
         private void ChosePhotosBtn_Click(object sender, RoutedEventArgs e)
@@ -38,7 +55,7 @@ namespace VK_Photo_Uploader.Pages
             if(res.Value)
             {
                 FileNames = ofd.FileNames;
-                PhotoStatus.Text = "Выбрано " + FileNames.Length + " фотографий";
+                PhotoStatus.Text = "Выбрано фотографий - " + FileNames.Length;
             }
         }
 

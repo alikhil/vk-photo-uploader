@@ -19,6 +19,11 @@ namespace VK_Photo_Uploader
     public static class VKPhotoUploader
     {
         private static VkApi Api = new VkApi();
+        public delegate void UploadImageProgressChange(UploadProgressChangedEventArgs e);
+        public static event UploadImageProgressChange OnImageUploadProgressChange;
+
+        public delegate void UploadTotalProgessChange(int uploaded, int total);
+        public static event UploadTotalProgessChange OnTotalProgressChange;
 
         public static bool Authorize(string email, string password)
         {
@@ -44,12 +49,18 @@ namespace VK_Photo_Uploader
                 var url = serverUp.UploadUrl;
 
                 var coll = new List<VkNet.Model.Attachments.Photo>().AsEnumerable();
+                int cnt = 0, total = files.Length;
+                if (OnTotalProgressChange != null)
+                    OnTotalProgressChange(cnt, total);
                 foreach (var file in files)
                 {
                     var res = await UploadFile(url, file);
                     var response = JsonConvert.DeserializeObject<PhotoResponse>(res);
                     var col = Api.Photo.SaveWallPhoto(response.Photo, Api.UserId, ownerId, response.Server, response.Hash);
                     coll = coll.Concat(col);
+                    cnt++;
+                    if (OnTotalProgressChange != null)
+                        OnTotalProgressChange(cnt, total);
                 }
                 var post = Api.Wall.Post(ownerId * (owner.Type == VkNet.Enums.VkObjectType.Group ? -1 : 1), false, true, message, coll, signed:true);
             }
@@ -69,9 +80,16 @@ namespace VK_Photo_Uploader
         private static async Task<string> UploadFile(string url, string fName)
         {
             WebClient wClient = new WebClient();
+            wClient.UploadProgressChanged += wClient_UploadProgressChanged;   
             var ans = await wClient.UploadFileTaskAsync(url, "POST", fName);
             string res = System.Text.Encoding.Default.GetString(ans);
             return res;
+        }
+
+        private static void wClient_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
+        {
+            if (OnImageUploadProgressChange != null)
+                OnImageUploadProgressChange(e);
         }
 
     }
