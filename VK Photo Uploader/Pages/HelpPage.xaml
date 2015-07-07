@@ -5,23 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="HelpPage">
+	Title="HelpPage" Loaded="Page_Loaded">
 
     <Grid>
-        <StackPanel>
-            <TextBlock HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Width="250" Margin="0,50,0,10" > 
-                Введите короткое имя пользователя, группы или приложения. Например, alikhil, andrew или rules_of_war.
+        <StackPanel Margin="25,25,25,0">
+            <TextBlock Margin="0,10" TextWrapping="Wrap">
+                <Hyperlink NavigateUri="http://alikhil.github.io/vk-photo-uploader/" RequestNavigate="Hyperlink_RequestNavigate">VK Photo Uploader </Hyperlink> - бесплатная программа для загрузки фотографий ВК, c открытым <Hyperlink NavigateUri="https://github.com/alikhil/vk-photo-uploader/" RequestNavigate="Hyperlink_RequestNavigate">исходным кодом</Hyperlink>
             </TextBlock>
-            <TextBox Name="ScreenNameTBox" Width="200"/>
-            <StackPanel Width="200" Margin="0,10">
-                <Label Content="Id" HorizontalAlignment="Left"/>
-                <TextBox Name="OwnerIdTBox" IsEnabled="False"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
-                <Button Width="100" Height="20" Content="Назад" Click="BackButton_Click"/>
-                <Button Width="100" Height="20" Margin="15,0,0,0" Click="GetIdBtn_Click" Content="Получить Id"/>
-            </StackPanel>
-            
+            <TextBlock Name="VersionTBlock" Text="{Binding Version}"/>
+           
+            <TextBlock TextWrapping="Wrap">
+                * На данный момент поддерживает загрузку фотографий не стену пользователя или группы по короткому имени
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10">
+                По всем вопросам и предложениям обращайтесь в <Hyperlink NavigateUri="https://vk.com/alikhil" RequestNavigate="Hyperlink_RequestNavigate" >ВК</Hyperlink> или пишите на почту <Hyperlink NavigateUri="mailto:alikhil@mail.ru">alikhil@mail.ru</Hyperlink>
+            </TextBlock>
+            <Button Width="100" Click="Button_Click">Назад</Button>
         </StackPanel>
     </Grid>
 </Page>
