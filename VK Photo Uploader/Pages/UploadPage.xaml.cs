@@ -43,9 +43,9 @@ namespace VK_Photo_Uploader.Pages
 
         private async void UploadBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(String.IsNullOrEmpty(OwnerIdTBox.Text))
+            if(String.IsNullOrEmpty(ScreenNameTBox.Text))
             {
-                MessageBox.Show("Укажите Id!");
+                MessageBox.Show("Укажите короткое имя!");
                 return;
             }
             if(FileNames.Length == 0)
@@ -53,35 +53,8 @@ namespace VK_Photo_Uploader.Pages
                 MessageBox.Show("Выберите фотографии!");
                 return;
             }
-            var res = await VKPhotoUploader.UploadImages(Convert.ToInt64(OwnerIdTBox.Text), FileNames, MessageTBox.Text);
+            var res = await VKPhotoUploader.UploadImages(ScreenNameTBox.Text, FileNames, MessageTBox.Text);
             MessageBox.Show(res == "OK" ? "Фотографии успешно загружены" : res);
-        }
-
-        private static bool IsTextAllowed(string text)
-        {
-            Regex regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
-            return !regex.IsMatch(text);
-        }
-
-        private void OwnerIdTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsTextAllowed(e.Text);
-        }
-
-        private void OwnerIdTBox_Pasting(object sender, DataObjectPastingEventArgs e)
-        {
-            if (e.DataObject.GetDataPresent(typeof(String)))
-            {
-                String text = (String)e.DataObject.GetData(typeof(String));
-                if (!IsTextAllowed(text))
-                {
-                    e.CancelCommand();
-                }
-            }
-            else
-            {
-                e.CancelCommand();
-            }
         }
 
     }

@@ -9,11 +9,8 @@
 
     <Grid>
         <StackPanel>
-            <Label Content="Введите Id пользователя или группы" HorizontalAlignment="Center" Margin="0,50,0,0"/>
-            <TextBox Name="OwnerIdTBox" Width="150" PreviewTextInput="OwnerIdTBox_PreviewTextInput" DataObject.Pasting="OwnerIdTBox_Pasting"/>
-            <TextBlock Margin="0,5"  HorizontalAlignment="Center">
-                <Hyperlink NavigateUri="HelpPage.xaml">Как узнать Id?</Hyperlink>
-            </TextBlock>
+            <TextBlock Width="250" TextWrapping="Wrap" Text=" Введите короткое имя пользователя или группы. Например, alikhil, andrew или rules_of_war" HorizontalAlignment="Center" Margin="0,20,0,5"/>
+            <TextBox Name="ScreenNameTBox" Width="150"/>
             <Label Content="Прикрепляемое сообщение"  HorizontalAlignment="Center"  />
             <TextBox Name="MessageTBox" TextWrapping="Wrap"  AcceptsReturn="True" Width="200"  />
             <TextBlock Name="PhotoStatus" HorizontalAlignment="Center" Margin="0,5"/>

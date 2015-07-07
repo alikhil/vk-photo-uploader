@@ -33,11 +33,13 @@ namespace VK_Photo_Uploader
             }
         }
 
-        public static async Task<string> UploadImages(long ownerId, string [] files, string message)
+        public static async Task<string> UploadImages(string screenName, string [] files, string message)
         {
             string result = "OK";
             try
             {
+                var owner = Api.Utils.ResolveScreenName(screenName);
+                var ownerId = owner.Id;
                 var serverUp = Api.Photo.GetWallUploadServer(ownerId);
                 var url = serverUp.UploadUrl;
 
@@ -49,11 +51,7 @@ namespace VK_Photo_Uploader
                     var col = Api.Photo.SaveWallPhoto(response.Photo, Api.UserId, ownerId, response.Server, response.Hash);
                     coll = coll.Concat(col);
                 }
-                long type = 1;
-                var owner = Api.Utils.ResolveScreenName(ownerId.ToString());
-                if (owner.Id != ownerId)
-                    type = -1;
-                var post = Api.Wall.Post(ownerId * type, false, true, message, coll, signed:true);
+                var post = Api.Wall.Post(ownerId * (owner.Type == VkNet.Enums.VkObjectType.Group ? -1 : 1), false, true, message, coll, signed:true);
             }
             catch (AccessDeniedException e)
             {
@@ -67,17 +65,13 @@ namespace VK_Photo_Uploader
            
             return result;
         }
-
+        
         private static async Task<string> UploadFile(string url, string fName)
         {
             WebClient wClient = new WebClient();
             var ans = await wClient.UploadFileTaskAsync(url, "POST", fName);
             string res = System.Text.Encoding.Default.GetString(ans);
             return res;
-        }
-        public static string GetOwnerId(string screenName)
-        {
-            return Api.Utils.ResolveScreenName(screenName).Id.ToString();
         }
 
     }
