@@ -27,7 +27,10 @@
             </StackPanel>
             <StackPanel  Width="250">
                 <TextBlock Name="UploadStatus" Text="Общий прогресс"/>
-                <ProgressBar Name="ImageProgressBar" Height="20" />
+                <ProgressBar Margin="0,5" Name="ImageProgressBar" Height="20" />
+                <TextBlock >
+                    <Hyperlink NavigateUri="AuthorizationPage.xaml">Сменить пользователя </Hyperlink>
+                </TextBlock>
             </StackPanel>
         </StackPanel>
     </Grid>
