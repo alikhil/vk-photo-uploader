@@ -22,6 +22,9 @@
                 <Button Width="110" Content="Выбрать фотки" Click="ChosePhotosBtn_Click" Height="20"/>
                 <Button Width="110" Content="Загрузить" Click="UploadBtn_Click" Height="20" Margin="30,0,0,0"/>
             </StackPanel>
+            <StackPanel Width="250" Margin="0,5">
+                <CheckBox Name="PublishFromGroupChBox" IsChecked="False"  HorizontalAlignment="Left" FlowDirection="RightToLeft" >Публиковать от имени группы</CheckBox>
+            </StackPanel>
             <StackPanel  Width="250">
                 <TextBlock Name="UploadStatus" Text="Общий прогресс"/>
                 <ProgressBar Name="ImageProgressBar" Height="20" />

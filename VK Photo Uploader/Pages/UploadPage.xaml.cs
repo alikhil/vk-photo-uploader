@@ -71,7 +71,7 @@ namespace VK_Photo_Uploader.Pages
                 MessageBox.Show("Выберите фотографии!");
                 return;
             }
-            var res = await VKPhotoUploader.UploadImages(ScreenNameTBox.Text, FileNames, MessageTBox.Text);
+            var res = await VKPhotoUploader.UploadImages(ScreenNameTBox.Text, FileNames, MessageTBox.Text, PublishFromGroupChBox.IsChecked.Value);
             MessageBox.Show(res == "OK" ? "Фотографии успешно загружены" : res);
         }
 
