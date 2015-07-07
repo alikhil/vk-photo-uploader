@@ -10,8 +10,6 @@ using Newtonsoft.Json;
 using System.Net;
 using System.IO;
 
-using VkNet.Exception;
-
 using VK_Photo_Uploader.Classes;
 
 namespace VK_Photo_Uploader
@@ -71,7 +69,7 @@ namespace VK_Photo_Uploader
             catch (Exception e)
             {
                 if(result == "OK")
-                    result = "Не удалось загрузить...";
+                    result = "Не удалось загрузить..." + e.Message;
             }
            
             return result;
