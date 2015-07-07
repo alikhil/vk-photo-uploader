@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,31 @@ namespace VK_Photo_Uploader.Pages
         public HelpPage()
         {
             InitializeComponent();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void GetIdBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Cursor = Cursors.Wait;
+            string screenName = ScreenNameTBox.Text;
+            if(String.IsNullOrEmpty(ScreenNameTBox.Text))
+            {
+                MessageBox.Show("Укажите короткое имя");
+                return;
+            }
+            Thread t = new Thread(new ThreadStart(() => {
+                var ownerId = VKPhotoUploader.GetOwnerId(screenName);
+                Dispatcher.Invoke(() => {
+                    OwnerIdTBox.IsEnabled = true;
+                    OwnerIdTBox.Text = ownerId;
+                    Cursor = Cursors.Arrow;
+                });
+            }));
+            t.Start();
         }
     }
 }

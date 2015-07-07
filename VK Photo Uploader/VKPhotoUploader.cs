@@ -50,8 +50,8 @@ namespace VK_Photo_Uploader
                     coll = coll.Concat(col);
                 }
                 long type = 1;
-                var owner = Api.Utils.ResolveScreenName("public" + ownerId);
-                if (owner.Id == ownerId)
+                var owner = Api.Utils.ResolveScreenName(ownerId.ToString());
+                if (owner.Id != ownerId)
                     type = -1;
                 var post = Api.Wall.Post(ownerId * type, false, true, message, coll, signed:true);
             }
@@ -74,6 +74,10 @@ namespace VK_Photo_Uploader
             var ans = await wClient.UploadFileTaskAsync(url, "POST", fName);
             string res = System.Text.Encoding.Default.GetString(ans);
             return res;
+        }
+        public static string GetOwnerId(string screenName)
+        {
+            return Api.Utils.ResolveScreenName(screenName).Id.ToString();
         }
 
     }
