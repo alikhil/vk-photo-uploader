@@ -60,7 +60,15 @@ namespace VK_Photo_Uploader
                     if (OnTotalProgressChange != null)
                         OnTotalProgressChange(cnt, total);
                 }
-                var post = Api.Wall.Post(ownerId * (owner.Type == VkNet.Enums.VkObjectType.Group ? -1 : 1), false, fromGroup, message, coll, signed:true);
+                try
+                {
+                    var post = Api.Wall.Post(ownerId * (owner.Type == VkNet.Enums.VkObjectType.Group ? -1 : 1), false, fromGroup, message, coll, signed: true);
+                }
+                catch
+                {
+                    if(fromGroup)
+                        Api.Wall.Post(ownerId * (owner.Type == VkNet.Enums.VkObjectType.Group ? -1 : 1), false, !fromGroup, message, coll, signed: true);
+                }
             }
             catch (AccessDeniedException e)
             {
