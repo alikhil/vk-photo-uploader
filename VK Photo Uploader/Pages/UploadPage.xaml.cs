@@ -38,6 +38,7 @@ namespace VK_Photo_Uploader.Pages
             if(res.Value)
             {
                 FileNames = ofd.FileNames;
+                PhotoStatus.Text = "Выбрано " + FileNames.Length + " фотографий";
             }
         }
 
