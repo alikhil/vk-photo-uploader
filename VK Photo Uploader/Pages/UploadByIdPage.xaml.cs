@@ -18,12 +18,12 @@ using System.Text.RegularExpressions;
 namespace VK_Photo_Uploader.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для UploadPage.xaml
+    /// Логика взаимодействия для UploadByIdPage.xaml
     /// </summary>
-    public partial class UploadPage : Page
+    public partial class UploadByIdPage : Page
     {
         private string[] FileNames = new string[] { };
-        public UploadPage()
+        public UploadByIdPage()
         {
             InitializeComponent();
             VKPhotoUploader.OnTotalProgressChange += VKPhotoUploader_OnTotalProgressChange;
