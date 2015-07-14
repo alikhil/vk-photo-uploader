@@ -8,7 +8,8 @@
 	Title="Tabs">
 
     <Grid>
-        <TabControl Height="150" VerticalAlignment="Top">
+        <StackPanel>
+        <TabControl Height="120" VerticalAlignment="Top">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -35,10 +36,38 @@
                         <TextBlock Text="Id"  />
                     </StackPanel>
                 </TabItem.Header>
-                <DockPanel>
-                    <Frame  NavigationUIVisibility="Hidden" Source="UploadByIdPage.xaml" />
-                </DockPanel>
+                <StackPanel>
+                    <StackPanel Width="250">
+                        <TextBlock  TextWrapping="Wrap" Text=" Введите короткое имя пользователя или группы. Например, alikhil, andrew или rules_of_war" HorizontalAlignment="Center" Margin="0,20,0,5"/>
+                        <TextBox Name="ScreenNameTBox" />
+                    </StackPanel>
+                </StackPanel>
             </TabItem>
         </TabControl>
+        <StackPanel  Width="250" >
+            <Label  HorizontalAlignment="Left" Content="Прикрепляемое сообщение"   />
+            <TextBox  Name="MessageTBox" TextWrapping="Wrap"  AcceptsReturn="True" />
+        </StackPanel>
+        <TextBlock Name="PhotoStatus" HorizontalAlignment="Center" Margin="0,5"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button Width="110" Content="Выбрать фотки" Click="ChosePhotosBtn_Click" Height="20"/>
+            <Button Width="110" Content="Загрузить" Click="UploadBtn_Click" Height="20" Margin="30,0,0,0"/>
+        </StackPanel>
+        <StackPanel Width="250" Margin="0,5">
+            <CheckBox Name="PublishFromGroupChBox" IsChecked="False"  HorizontalAlignment="Left" FlowDirection="RightToLeft" >Публиковать от имени группы</CheckBox>
+        </StackPanel>
+        <StackPanel  Width="250">
+            <TextBlock Name="UploadStatus" Text="Общий прогресс"/>
+            <ProgressBar Margin="0,5" Name="ImageProgressBar" Height="20" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock >
+                        <Hyperlink NavigateUri="AuthorizationPage.xaml">Сменить пользователя </Hyperlink>
+                </TextBlock>
+                <TextBlock Margin="70,0,0,0" >
+                        <Hyperlink NavigateUri="HelpPage.xaml">Помощь</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
