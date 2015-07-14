@@ -40,8 +40,8 @@ namespace VK_Photo_Uploader.Pages
                     StatusLabel.Content = !auth ? "Неправильный пароль или логин" : "";
                     if (auth)
                     {
-                        UploadByIdPage UploadP = new UploadByIdPage();
-                        NavigationService.Navigate(UploadP);
+                        Tabs tabs = new Tabs();
+                        NavigationService.Navigate(tabs);
                     }
                     else
                     {
