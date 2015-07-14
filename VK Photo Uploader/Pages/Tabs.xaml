@@ -18,7 +18,7 @@
                 </TabItem.Header>
                     <StackPanel Width="250">
                         <TextBlock  TextWrapping="Wrap" Text="Выберите группу, на стену которого хотите загрузить фотографии" HorizontalAlignment="Center" Margin="0,20,0,5"/>
-                        <ComboBox Name="GroupNameCBox" >
+                        <ComboBox Name="GroupNameCBox"  >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

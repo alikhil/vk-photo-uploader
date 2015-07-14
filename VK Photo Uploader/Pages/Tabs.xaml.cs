@@ -68,26 +68,42 @@ namespace VK_Photo_Uploader.Pages
         private async void UploadBtn_Click(object sender, RoutedEventArgs e)
         {
             int tabId = TabsControl.SelectedIndex;
-            switch (tabId)
-            {
-                //Группы
-                case 0:
-                    if(GroupNameCBox.Value)
-
-                    break;
-            }
-            if(String.IsNullOrEmpty(ScreenNameTBox.Text))
-            {
-                MessageBox.Show("Укажите короткое имя!");
-                return;
-            }
-            if(FileNames.Length == 0)
+            if (FileNames.Length == 0)
             {
                 MessageBox.Show("Выберите фотографии!");
                 return;
             }
-            var res = await VKPhotoUploader.UploadImages(ScreenNameTBox.Text, FileNames, MessageTBox.Text, PublishFromGroupChBox.IsChecked.Value);
-            MessageBox.Show(res == "OK" ? "Фотографии успешно загружены" : res);
+            switch (tabId)
+            {
+                //Группы
+                case 0:
+                    if(GroupNameCBox.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Выберите группу!");
+                        return;
+                    }
+                    await Validator.Try(Groups[GroupNameCBox.SelectedIndex], FileNames, PublishFromGroupChBox.IsChecked.Value, MessageTBox.Text);
+                    break;
+                case 1:
+                    if (FriendNameCBox.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Выберите друга!");
+                        return;
+                    }
+                    await Validator.Try(Friends[FriendNameCBox.SelectedIndex], FileNames,MessageTBox.Text);
+                    break;
+                case 2:
+                    if (String.IsNullOrEmpty(ScreenNameTBox.Text))
+                    {
+                        MessageBox.Show("Укажите короткое имя!");
+                        return;
+                    }
+                    await Validator.Try(ScreenNameTBox.Text, FileNames, MessageTBox.Text, PublishFromGroupChBox.IsChecked.Value);
+                    break;
+            }
+           
+            //var res = await VKPhotoUploader.UploadImages(ScreenNameTBox.Text, FileNames, MessageTBox.Text, PublishFromGroupChBox.IsChecked.Value);
+            //MessageBox.Show(res == "OK" ? "Фотографии успешно загружены" : res);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
