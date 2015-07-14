@@ -11,6 +11,8 @@ using System.Net;
 using System.IO;
 
 using VK_Photo_Uploader.Classes;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace VK_Photo_Uploader
 {
@@ -32,6 +34,13 @@ namespace VK_Photo_Uploader
             }
             catch(VkApiAuthorizationException ex)
             {
+                return false;
+            }
+            catch (Exception e)
+            {
+                Dispatcher.CurrentDispatcher.Invoke(() => {
+                    MessageBox.Show(String.Format("Message: {0}", e.Message));
+                });
                 return false;
             }
         }
