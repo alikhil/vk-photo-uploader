@@ -13,7 +13,7 @@ using System.IO;
 using VK_Photo_Uploader.Classes;
 using System.Windows;
 using System.Windows.Threading;
-
+using VkNet.Model;
 namespace VK_Photo_Uploader
 {
     public static class VKPhotoUploader
@@ -107,5 +107,11 @@ namespace VK_Photo_Uploader
                 OnImageUploadProgressChange(e);
         }
 
+        public static List<User> GetFriends()
+        {
+           var friends = Api.Friends.Get(Api.UserId.Value, ProfileFields.CanPost);
+           return new List<User>(friends);
+        }
+        
     }
 }
