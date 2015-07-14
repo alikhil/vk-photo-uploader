@@ -14,6 +14,8 @@ using VK_Photo_Uploader.Classes;
 using System.Windows;
 using System.Windows.Threading;
 using VkNet.Model;
+using VkNet.Enums;
+using VkNet.Model.Attachments;
 namespace VK_Photo_Uploader
 {
     public static class VKPhotoUploader
@@ -45,17 +47,29 @@ namespace VK_Photo_Uploader
             }
         }
 
-        public static async Task<string> UploadImages(string screenName, string [] files, string message, bool fromGroup)
+        public static VkObject IdentifyScreenName(string screenName)
+        {
+            return Api.Utils.ResolveScreenName(screenName);
+        }
+
+        public static User FindUserById(long id)
+        {
+            return Api.Users.Get(id, ProfileFields.CanPost);
+        }
+        public static Group FindGroupById(long id)
+        {
+            var res = Api.Groups.Get(id, true, fields:GroupsFields.CanPost);
+            return res != null && res.Count > 0 ? res[0] : null;
+        }
+        public static async Task UploadImages(string screenName, string [] files, string message, bool fromGroup, VkNet.Enums.VkObjectType type, long ownerId)
         {
             string result = "OK";
             try
             {
-                var owner = Api.Utils.ResolveScreenName(screenName);
-                var ownerId = owner.Id;
                 var serverUp = Api.Photo.GetWallUploadServer(ownerId);
                 var url = serverUp.UploadUrl;
 
-                var coll = new List<VkNet.Model.Attachments.Photo>().AsEnumerable();
+                var coll = new List<Photo>().AsEnumerable();
                 int cnt = 0, total = files.Length;
                 if (OnTotalProgressChange != null)
                     OnTotalProgressChange(cnt, total);
@@ -71,12 +85,12 @@ namespace VK_Photo_Uploader
                 }
                 try
                 {
-                    var post = Api.Wall.Post(ownerId * (owner.Type == VkNet.Enums.VkObjectType.Group ? -1 : 1), false, fromGroup, message, coll, signed: true);
+                    var post = Api.Wall.Post(ownerId * (type == VkNet.Enums.VkObjectType.Group ? -1 : 1), false, fromGroup, message, coll, signed: true);
                 }
                 catch
                 {
                     if(fromGroup)
-                        Api.Wall.Post(ownerId * (owner.Type == VkNet.Enums.VkObjectType.Group ? -1 : 1), false, !fromGroup, message, coll, signed: true);
+                        Api.Wall.Post(ownerId * (type == VkNet.Enums.VkObjectType.Group ? -1 : 1), false, !fromGroup, message, coll, signed: true);
                 }
             }
             catch (AccessDeniedException e)
@@ -88,8 +102,10 @@ namespace VK_Photo_Uploader
                 if(result == "OK")
                     result = "Не удалось загрузить..." + e.Message;
             }
-           
-            return result;
+
+            Dispatcher.CurrentDispatcher.Invoke(() => {
+                MessageBox.Show(result == "OK" ? "Фотографии успешно загружены" : result);
+            });
         }
         
         private static async Task<string> UploadFile(string url, string fName)
