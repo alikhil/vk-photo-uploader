@@ -84,6 +84,7 @@ namespace VK_Photo_Uploader.Pages
                     }
                     await Validator.Try(Groups[GroupNameCBox.SelectedIndex], FileNames, PublishFromGroupChBox.IsChecked.Value, MessageTBox.Text);
                     break;
+                    //Друзья
                 case 1:
                     if (FriendNameCBox.SelectedIndex == -1)
                     {
@@ -92,6 +93,7 @@ namespace VK_Photo_Uploader.Pages
                     }
                     await Validator.Try(Friends[FriendNameCBox.SelectedIndex], FileNames,MessageTBox.Text);
                     break;
+                    //По screenName
                 case 2:
                     if (String.IsNullOrEmpty(ScreenNameTBox.Text))
                     {
@@ -102,18 +104,18 @@ namespace VK_Photo_Uploader.Pages
                     break;
             }
            
-            //var res = await VKPhotoUploader.UploadImages(ScreenNameTBox.Text, FileNames, MessageTBox.Text, PublishFromGroupChBox.IsChecked.Value);
-            //MessageBox.Show(res == "OK" ? "Фотографии успешно загружены" : res);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            Cursor = Cursors.Wait;
             Thread t = new Thread(new ThreadStart(() => {
                 Friends = VKPhotoUploader.GetFriends();
                 Groups = VKPhotoUploader.GetGroups();
                 Dispatcher.Invoke(() => {
                     FriendNameCBox.ItemsSource = Friends;
                     GroupNameCBox.ItemsSource = Groups;
+                    Cursor = Cursors.Arrow;
                 });
             }));
             t.Start();
