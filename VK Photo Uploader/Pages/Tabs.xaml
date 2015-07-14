@@ -9,17 +9,26 @@
 
     <Grid>
         <StackPanel>
-        <TabControl Height="120" VerticalAlignment="Top">
+        <TabControl Name="TabsControl" Height="120" VerticalAlignment="Top">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Группы" Foreground="Blue" />
                     </StackPanel>
                 </TabItem.Header>
-                <DockPanel>
-                    <Frame  NavigationUIVisibility="Hidden" />
-                </DockPanel>
-            </TabItem>
+                    <StackPanel Width="250">
+                        <TextBlock  TextWrapping="Wrap" Text="Выберите группу, на стену которого хотите загрузить фотографии" HorizontalAlignment="Center" Margin="0,20,0,5"/>
+                        <ComboBox Name="GroupNameCBox" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">

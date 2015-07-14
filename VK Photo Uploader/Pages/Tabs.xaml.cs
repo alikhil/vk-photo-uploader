@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using VkNet.Model;
 namespace VK_Photo_Uploader.Pages
 {
     /// <summary>
@@ -22,6 +23,8 @@ namespace VK_Photo_Uploader.Pages
     /// </summary>
     public partial class Tabs : Page
     {
+        public static List<User> Friends { get; set; }
+        public static List<Group> Groups { get; set; }
         public Tabs()
         {
             InitializeComponent();
@@ -64,6 +67,15 @@ namespace VK_Photo_Uploader.Pages
 
         private async void UploadBtn_Click(object sender, RoutedEventArgs e)
         {
+            int tabId = TabsControl.SelectedIndex;
+            switch (tabId)
+            {
+                //Группы
+                case 0:
+                    if(GroupNameCBox.Value)
+
+                    break;
+            }
             if(String.IsNullOrEmpty(ScreenNameTBox.Text))
             {
                 MessageBox.Show("Укажите короткое имя!");
@@ -81,9 +93,11 @@ namespace VK_Photo_Uploader.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Thread t = new Thread(new ThreadStart(() => {
-                var friends = VKPhotoUploader.GetFriends();
+                Friends = VKPhotoUploader.GetFriends();
+                Groups = VKPhotoUploader.GetGroups();
                 Dispatcher.Invoke(() => {
-                    FriendNameCBox.ItemsSource = friends;
+                    FriendNameCBox.ItemsSource = Friends;
+                    GroupNameCBox.ItemsSource = Groups;
                 });
             }));
             t.Start();
