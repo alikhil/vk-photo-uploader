@@ -5,21 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="Tabs">
+	Title="Tabs" Loaded="Page_Loaded">
 
     <Grid>
         <StackPanel>
         <TabControl Height="120" VerticalAlignment="Top">
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Друзья" Foreground="Green" />
-                    </StackPanel>
-                </TabItem.Header>
-                <DockPanel>
-                    <Frame  NavigationUIVisibility="Hidden" />
-                </DockPanel>
-            </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -33,17 +23,37 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Друзья" Foreground="Green" />
+                    </StackPanel>
+                </TabItem.Header>
+                    <StackPanel Width="250">
+                        <TextBlock  TextWrapping="Wrap" Text="Выберите друга, на стену которого хотите загрузить фотографии" HorizontalAlignment="Center" Margin="0,20,0,5"/>
+                        <ComboBox Name="FriendNameCBox" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding FirstName}"/>
+                                        <TextBlock Margin="10,0,0,0" Text="{Binding LastName}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Id"  />
                     </StackPanel>
                 </TabItem.Header>
-                <StackPanel>
-                    <StackPanel Width="250">
-                        <TextBlock  TextWrapping="Wrap" Text=" Введите короткое имя пользователя или группы. Например, alikhil, andrew или rules_of_war" HorizontalAlignment="Center" Margin="0,20,0,5"/>
-                        <TextBox Name="ScreenNameTBox" />
+                    <StackPanel>
+                        <StackPanel Width="250">
+                            <TextBlock  TextWrapping="Wrap" Text=" Введите короткое имя пользователя или группы. Например, alikhil, andrew или rules_of_war" HorizontalAlignment="Center" Margin="0,20,0,5"/>
+                            <TextBox Name="ScreenNameTBox" />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
+                </TabItem>
+            </TabControl>
         <StackPanel  Width="250" >
             <Label  HorizontalAlignment="Left" Content="Прикрепляемое сообщение"   />
             <TextBox  Name="MessageTBox" TextWrapping="Wrap"  AcceptsReturn="True" />

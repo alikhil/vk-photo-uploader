@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -75,6 +76,17 @@ namespace VK_Photo_Uploader.Pages
             }
             var res = await VKPhotoUploader.UploadImages(ScreenNameTBox.Text, FileNames, MessageTBox.Text, PublishFromGroupChBox.IsChecked.Value);
             MessageBox.Show(res == "OK" ? "Фотографии успешно загружены" : res);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(() => {
+                var friends = VKPhotoUploader.GetFriends();
+                Dispatcher.Invoke(() => {
+                    FriendNameCBox.ItemsSource = friends;
+                });
+            }));
+            t.Start();
         }
     }
 }
