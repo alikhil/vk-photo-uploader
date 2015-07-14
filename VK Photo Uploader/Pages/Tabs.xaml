@@ -9,7 +9,7 @@
 
     <Grid>
         <StackPanel>
-        <TabControl Name="TabsControl" Height="120" VerticalAlignment="Top">
+        <TabControl Name="TabsControl" Height="130" VerticalAlignment="Top">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -21,8 +21,9 @@
                         <ComboBox Name="GroupNameCBox"  >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}"/>
+                                    <StackPanel Orientation="Horizontal" Width="250">
+                                        <Image HorizontalAlignment="Left" Margin="0,0,10,0" Width="30" Height="30" Source="{Binding PhotoPreviews.Photo50}"/>
+                                        <TextBlock TextWrapping="Wrap" Width="250" Text="{Binding Name}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
@@ -40,9 +41,10 @@
                         <ComboBox Name="FriendNameCBox" >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding FirstName}"/>
-                                        <TextBlock Margin="10,0,0,0" Text="{Binding LastName}"/>
+                                    <StackPanel Orientation="Horizontal" Width="250">
+                                        <Image HorizontalAlignment="Left" Width="30" Height="30" Source="{Binding PhotoPreviews.Photo50}"/>
+                                        <TextBlock VerticalAlignment="Center" Margin="10,0" Text="{Binding FirstName}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding LastName}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
