@@ -17,9 +17,13 @@
             <TextBlock TextWrapping="Wrap">
                 * Поддерживает загрузку фотографий не стену пользователя или группы по короткому имени
             </TextBlock>
-            <TextBlock Name="VersionTBlock" Text="{Binding Version}"/>
+            <TextBlock Margin="0,5,0,0" Text="1.1.0"/>
             <TextBlock TextWrapping="Wrap">
                 * Добавлена возможность выбирать из списка своих друзей/групп
+            </TextBlock>
+            <TextBlock  Margin="0,5,0,0" Name="VersionTBlock" Text="{Binding Version}"/>
+            <TextBlock TextWrapping="Wrap">
+                * Прогружает иконки друзей/групп в списках выбора
             </TextBlock>
             <TextBlock TextWrapping="Wrap" Margin="0,10">
                 По всем вопросам и предложениям обращайтесь в <Hyperlink NavigateUri="https://vk.com/alikhil" RequestNavigate="Hyperlink_RequestNavigate" >ВК</Hyperlink> или пишите на почту <Hyperlink NavigateUri="mailto:alikhil@mail.ru">alikhil@mail.ru</Hyperlink>
