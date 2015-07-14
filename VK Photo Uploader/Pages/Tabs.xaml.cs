@@ -114,7 +114,9 @@ namespace VK_Photo_Uploader.Pages
                 Groups = VKPhotoUploader.GetGroups();
                 Dispatcher.Invoke(() => {
                     FriendNameCBox.ItemsSource = Friends;
+                    FriendNameCBox.SelectedIndex = 0;
                     GroupNameCBox.ItemsSource = Groups;
+                    GroupNameCBox.SelectedIndex = 0;
                     Cursor = Cursors.Arrow;
                 });
             }));
