@@ -112,6 +112,10 @@ namespace VK_Photo_Uploader
            var friends = Api.Friends.Get(Api.UserId.Value, ProfileFields.CanPost);
            return new List<User>(friends);
         }
-        
+        public static List<Group> GetGroups()
+        {
+            var groups = Api.Groups.Get(Api.UserId.Value, true, fields: GroupsFields.CanPost);
+            return new List<Group>(groups);
+        }
     }
 }
