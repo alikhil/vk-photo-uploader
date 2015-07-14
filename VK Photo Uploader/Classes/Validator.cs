@@ -27,7 +27,7 @@ namespace VK_Photo_Uploader.Pages
                 if (res != MessageBoxResult.Yes)
                     return;
             });
-           await VKPhotoUploader.UploadImages(group.ScreenName, fileNames, message, fromGroup, VkNet.Enums.VkObjectType.Group);
+           await VKPhotoUploader.UploadImages(group.ScreenName, fileNames, message, fromGroup, VkNet.Enums.VkObjectType.Group, group.Id);
         }
         public async static Task Try(User user, string[] fileNames, string message = null)
         {
@@ -45,7 +45,7 @@ namespace VK_Photo_Uploader.Pages
                 if (res != MessageBoxResult.Yes)
                     return;
             });
-            await VKPhotoUploader.UploadImages(user.Domain, fileNames, message, false, VkNet.Enums.VkObjectType.User);
+            await VKPhotoUploader.UploadImages(user.Domain, fileNames, message, false, VkNet.Enums.VkObjectType.User, user.Id);
         }
 
         public async static Task Try(string screenName, string[] fileNames, string message, bool fromGroup)
